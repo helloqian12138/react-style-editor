@@ -1,0 +1,16 @@
+# .prettierrc or .prettierrc.yaml
+useTabs: false
+tabWidth: 2
+endOfLine: 'lf'
+insertFinalNewline: true
+trailingComma: true
+semi: true
+singleQuote: true
+bracketSameLine: true
+overrides:
+  - files:
+      - '*.json'
+      - '*.css'
+      - '*.less'
+    options:
+      useTabs: true

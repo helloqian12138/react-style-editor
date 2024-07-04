@@ -1,0 +1,106 @@
+{
+	"name": "react-style-editor",
+	"version": "1.0.0",
+	"description": "a form that generate css styles or CSSProperties",
+	"main": "dist/index.umd.js",
+	"module": "dist/index.es.js",
+	"types": "dist/types/index.d.ts",
+	"files": [
+		"/dist"
+	],
+	"scripts": {
+		"dev": "vite",
+		"watch": "rollup --watch --config ./rollup.config.js",
+		"build": "rollup --config ./rollup.config.js --sourcemap",
+		"prettier": "prettier --config .prettierrc.yml --write .",
+		"lint": "pnpm run lint --stream || exit 1",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/helloqian12138/react-style-editor.git"
+	},
+	"keywords": [
+		"style",
+		"editor"
+	],
+	"devDependencies": {
+		"@babel/core": "^7.24.6",
+		"@babel/plugin-transform-runtime": "^7.24.6",
+		"@babel/preset-env": "^7.24.6",
+		"@babel/preset-react": "^7.24.6",
+		"@babel/preset-typescript": "^7.24.6",
+		"@babel/runtime": "^7.24.6",
+		"@commitlint/cli": "^17.1.2",
+		"@commitlint/config-conventional": "^17.1.0",
+		"@rollup/plugin-alias": "^4.0.2",
+		"@rollup/plugin-babel": "^6.0.2",
+		"@rollup/plugin-commonjs": "^23.0.2",
+		"@rollup/plugin-json": "^5.0.1",
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"@rollup/plugin-replace": "^5.0.1",
+		"@rollup/plugin-strip": "^2.1.0",
+		"@rollup/plugin-typescript": "^11.1.6",
+		"@types/lodash": "^4.17.4",
+		"@types/node": "^14.18.63",
+		"@types/react": "^17.0.80",
+		"@types/react-dom": "^17.0.25",
+		"@typescript-eslint/eslint-plugin": "^5.62.0",
+		"@typescript-eslint/parser": "^5.62.0",
+		"@vitejs/plugin-react": "^2.2.0",
+		"camelcase": "^6.3.0",
+		"chalk": "^4.1.2",
+		"commitizen": "^4.2.5",
+		"conventional-changelog-conventionalcommits": "^5.0.0",
+		"cross-env": "^7.0.2",
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^8.26.0",
+		"eslint-plugin-jest": "^27.1.3",
+		"eslint-plugin-react": "^7.31.10",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"execa": "^5.1.1",
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
+		"postcss": "^8.4.38",
+		"prettier": "^3.3.2",
+		"rollup": "3.29.4",
+		"rollup-plugin-clear": "^2.0.7",
+		"rollup-plugin-postcss": "^4.0.0",
+		"rollup-plugin-progress": "^1.1.2",
+		"rollup-plugin-size-snapshot": "^0.12.0",
+		"rollup-plugin-visualizer": "^5.12.0",
+		"typescript": "^5.4.5",
+		"vite": "^4.5.3"
+	},
+	"dependencies": {
+		"less": "^4.2.0",
+		"lodash": "^4.17.21",
+		"react-use": "^17.4.0"
+	},
+	"peerDependencies": {
+		"react": "17.0.2",
+		"react-dom": "17.0.2"
+	},
+	"resolutions": {
+		"react-error-overlay": "6.0.9",
+		"rollup": "3.29.4"
+	},
+	"lint-staged": {
+		"*.{tsx,ts,jsx,js}": [
+			"eslint --quiet --fix",
+			"prettier --config .prettierrc.yml --write"
+		],
+		"*.json": "prettier --config .prettierrc.yml --write"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	},
+	"author": "helloqian12138",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/helloqian12138/react-style-editor/issues"
+	},
+	"homepage": "https://github.com/helloqian12138/react-style-editor#readme"
+}
