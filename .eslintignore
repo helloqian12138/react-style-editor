@@ -1,20 +1,11 @@
-.idea/
-.vscode/
+# /node_modules/* and /bower_components/* ignored by default
+
+!.*.js
+!.*.ts
+*.min.js
+
+/example
 /node_modules
-**/node_modules
-.DS_Store
-*.log
-.husky
-yarn.lock
-
-# Build Script
-/scripts
-*.config.js
-
-# Packages ignore
-/packages/*/dist
-/packages/*/build
-/packages/*/types
-/packages/*/dll
-
-packages/*/types
+/build
+/dist
+/*.js

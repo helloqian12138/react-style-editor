@@ -1,27 +1,16 @@
 {
-	"include": ["./src/"],
-	"compilerOptions": {
-		"allowSyntheticDefaultImports": true,
-		"noImplicitAny": true,
-		"downlevelIteration": true,
-		"baseUrl": ".",
-		"outDir": "dist",
-		"target": "ES5",
-		"useDefineForClassFields": true,
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
-		"allowJs": false,
-		"skipLibCheck": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"module": "ESNext",
-		"moduleResolution": "Node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "react-jsx",
-		"declaration": true,
-		"declarationMap": true,
-		"declarationDir": "./types",
-		"noEmit": false,
-		"emitDeclarationOnly": false
-	}
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "outDir": "./dist"
+  },
+  "include": ["src"]
 }

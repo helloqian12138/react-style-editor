@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   logLevel: 'info',
   server: {
-    host: 'local.m.jd.com',
+    host: 'localhost',
     port: 8080,
     open: true,
     hmr: true
