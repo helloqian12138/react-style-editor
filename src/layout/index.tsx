@@ -1,15 +1,26 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Collapse } from 'antd';
 import { ReactStyleEditorProps } from '../typing';
-
-const sizeMap = {
-  small: 'small' as const,
-  default: 'middle' as const,
-  large: 'large' as const,
-};
+import BoxStylesEditor from './box';
+import './index.less';
 
 const EditorLayout = (props: ReactStyleEditorProps) => {
-  return <Button size={props.size ? sizeMap[props.size] : void 0}>BTN</Button>;
+  return (
+    <Collapse
+      bordered={false}
+      className="rse-collapse-header"
+      style={{ borderTop: '1px solid #303030' }}
+      defaultActiveKey={['1']}
+      ghost
+      items={[
+        {
+          key: '1',
+          label: '盒模型样式',
+          children: <BoxStylesEditor {...props} />,
+        },
+      ]}
+    />
+  );
 };
 
 export default EditorLayout;

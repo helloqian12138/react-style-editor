@@ -1,6 +1,6 @@
 export interface ReactStyleEditorProps {
   lib?: 'antd';
-  size?: 'small' | 'default' | 'large';
+  size?: 'small' | 'middle' | 'large';
 }
 
 export interface ReactStyleEditorHandler {
