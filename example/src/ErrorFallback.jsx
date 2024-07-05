@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Result } from '@jd/jdesign-react'
+import React from 'react';
+import { Button, Result } from 'antd';
 
 const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
@@ -7,18 +7,20 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
       status="error"
       title={
         <>
-          Something went wrong:
+          Something went wrong!
           <br />
           <Button
             size="small"
             style={{ marginLeft: 10 }}
-            onClick={resetErrorBoundary}>
-            刷新组件
+            onClick={resetErrorBoundary}
+          >
+            Refresh
           </Button>
         </>
       }
-      subTitle={error.message}></Result>
-  )
-}
+      subTitle={error.message}
+    ></Result>
+  );
+};
 
-export default ErrorFallback
+export default ErrorFallback;

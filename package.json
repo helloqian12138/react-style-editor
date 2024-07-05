@@ -1,14 +1,15 @@
 {
-  "name": "react-style-editor",
+  "name": "react-css-style-editor",
   "version": "0.0.1",
   "description": "a form that generate css styles or CSSProperties",
-  "main": "dist/index.umd.js",
-  "module": "dist/index.es.js",
+  "main": "dist/umd/index.js",
+  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "/dist"
   ],
   "scripts": {
+    "example": "cd ./example && npm run dev",
     "dev": "rollup -c --watch",
     "build": "rollup -c",
     "lint": "npm run lint:ts && npm run lint:style",
