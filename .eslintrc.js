@@ -1,3 +1,7 @@
+const path = require('path');
+
+const importResolverExtensions = ['.js', '.jsx', '.jx', '.ts', '.tsx', '.tx'];
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: [
@@ -14,6 +18,18 @@ module.exports = {
     },
   },
   settings: {
+    'import/resolver': {
+      alias: {
+        map: [['@', path.resolve(__dirname, './src/')]],
+        extensions: importResolverExtensions,
+      },
+      node: {
+        extensions: importResolverExtensions,
+      },
+    },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.tx'],
+    },
     react: {
       version: 'detect',
     },

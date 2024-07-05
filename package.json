@@ -1,5 +1,5 @@
 {
-  "name": "react-css-style-editor",
+  "name": "css-style-editor",
   "version": "0.0.1",
   "description": "a form that generate css styles or CSSProperties",
   "main": "dist/umd/index.js",
@@ -20,6 +20,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
+    "@ant-design/icons": "^5.3.7",
+    "antd": "^5.19.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -33,14 +35,18 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/lodash": "^4.17.6",
     "@types/react": "^17.0.30",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "babel-loader": "^9.1.3",
+    "babel-plugin-import": "^1.13.8",
     "eslint": "^8.57.0",
     "eslint-config-lvmcn": "^0.0.59",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-json": "^4.0.0",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.34.3",
@@ -97,5 +103,8 @@
   "homepage": "https://github.com/helloqian12138/react-style-editor#readme",
   "directories": {
     "example": "example"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }

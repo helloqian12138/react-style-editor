@@ -1,3 +1,5 @@
-import MyComponent from './my-component';
+import ReactStyleEditor from './wrapper';
 
-export default MyComponent;
+export default ReactStyleEditor;
+
+export * from './typing';
