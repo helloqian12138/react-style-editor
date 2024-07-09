@@ -30,6 +30,24 @@ module.exports = {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx', '.tx'],
     },
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always', // always or never
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        alphabetize: {
+          order: 'asc', // asc or desc
+          caseInsensitive: true,
+        },
+      },
+    ],
     react: {
       version: 'detect',
     },
@@ -37,4 +55,5 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
   },
+  plugins: ['import'],
 };

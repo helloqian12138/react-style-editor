@@ -1,18 +1,22 @@
+import { Button } from 'antd';
 import React, { PureComponent } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import ErrorFallback from './ErrorFallback';
 import StyleEditor from 'css-style-editor';
-import './App.css';
 import PropsForm from './form';
 
+import './App.css';
+import 'css-style-editor/dist/umd/index.css';
+
 function App() {
+  const editor = React.useRef(null);
   const [editorProps, setEditorProps] = React.useState({});
   return (
     <div className="app">
       <div className="left preview">
         <div className="container">
-          <StyleEditor {...editorProps} />
+          <StyleEditor ref={editor} {...editorProps} />
         </div>
       </div>
       <div className="right">
@@ -23,6 +27,13 @@ function App() {
             setEditorProps({ ...editorProps, ...newProps })
           }
         />
+        <Button
+          onClick={() => {
+            console.log(editor.current?.getCSSProperties());
+          }}
+        >
+          CSS 样式
+        </Button>
       </div>
     </div>
   );

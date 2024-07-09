@@ -42,23 +42,15 @@ export default {
     }),
     postcss({
       extensions: ['.less'],
-      process: (context) => {
-        return new Promise((resolve, reject) => {
-          less.render(
-            context.code,
-            {
-              paths: ['./src'], // Specify search paths for @import directives
-            },
-            (err, result) => {
-              if (err) return reject(err);
-              resolve({
-                code: result.css,
-                map: result.map,
-              });
-            },
-          );
-        });
-      },
+      extract: true, // 将 CSS 提取到单独的文件中
+      use: [
+        [
+          'less',
+          {
+            javascriptEnabled: true, // This ensures that Less can process JS expressions
+          },
+        ],
+      ],
     }),
     terser(),
   ],
