@@ -1,10 +1,8 @@
-import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-const importAll = (r) => r.keys().map(r)
-const components = importAll(require.context('./pages', false, /\.jsx$/))
-
-console.log(components)
+const importAll = (r) => r.keys().map(r);
+const components = importAll(require.context('./pages', false, /\.jsx$/));
 
 const Routes = () => {
   return (
@@ -25,7 +23,7 @@ const Routes = () => {
         </Switch>
       </div>
     </Router>
-  )
-}
+  );
+};
 
-export default Routes
+export default Routes;

@@ -11,7 +11,12 @@ import 'css-style-editor/dist/umd/index.css';
 
 function App() {
   const editor = React.useRef(null);
-  const [editorProps, setEditorProps] = React.useState({});
+  const [editorProps, setEditorProps] = React.useState({
+    value: {
+      margin: '8px 6px',
+      border: '1px solid #1970FF',
+    },
+  });
   return (
     <div className="app">
       <div className="left preview">
@@ -21,12 +26,7 @@ function App() {
       </div>
       <div className="right">
         <div className="form-header">编辑属性</div>
-        <PropsForm
-          value={editorProps}
-          onChange={(newProps) =>
-            setEditorProps({ ...editorProps, ...newProps })
-          }
-        />
+        <PropsForm value={editorProps} onChange={(newProps) => setEditorProps({ ...editorProps, ...newProps })} />
         <Button
           onClick={() => {
             console.log(editor.current?.getCSSProperties());

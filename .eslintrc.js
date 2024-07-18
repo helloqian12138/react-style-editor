@@ -4,12 +4,7 @@ const importResolverExtensions = ['.js', '.jsx', '.jx', '.ts', '.tsx', '.tx'];
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
@@ -34,14 +29,7 @@ module.exports = {
       'error',
       {
         'newlines-between': 'always', // always or never
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
         alphabetize: {
           order: 'asc', // asc or desc
           caseInsensitive: true,
@@ -54,6 +42,7 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    'max-len': ['error', { code: 120 }],
   },
   plugins: ['import'],
 };

@@ -2,13 +2,18 @@ import React from 'react';
 import { Collapse } from 'antd';
 import { ReactStyleEditorProps } from '../typing';
 import BoxStylesEditor from './box';
-import { CaretRightOutlined } from '@ant-design/icons';
+import { CaretRightOutlined, ClearOutlined } from '@ant-design/icons';
 
 import './index.less';
+import BorderStylesEditor, { BorderStylesEditorHandler } from './border';
+import { EditorContext } from '../hook';
 
 const EditorLayout = (props: ReactStyleEditorProps) => {
   const container = React.useRef<HTMLDivElement>(null);
+  const borderEditor = React.useRef<BorderStylesEditorHandler>(null);
   const [containerWidth, setContainerWidth] = React.useState(0);
+  const { styles, setState } = React.useContext(EditorContext);
+
   React.useEffect(() => {
     let ro: ResizeObserver | undefined;
     if (container.current) {
@@ -34,19 +39,39 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
     <Collapse
       ref={container}
       bordered={false}
-      className="rse-collapse-header"
-      defaultActiveKey={['1']}
-      expandIcon={({ isActive }) => (
-        <CaretRightOutlined rotate={isActive ? 90 : 0} />
-      )}
+      defaultActiveKey={['2']}
+      expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       ghost
       size={props.size}
       expandIconPosition="end"
       items={[
         {
           key: '1',
-          label: '盒模型样式',
+          label: '容器样式',
           children: <BoxStylesEditor {...{ ...props, containerWidth }} />,
+          style: { borderBottom: '1px solid #e6e6e6', borderRadius: 0 },
+        },
+        {
+          key: '2',
+          label: '边框及圆角样式',
+          children: <BorderStylesEditor ref={borderEditor} />,
+          extra: (
+            <ClearOutlined
+              onClick={(e) => {
+                e.stopPropagation();
+                borderEditor.current?.clearState();
+                const newStyles = { ...styles };
+                delete newStyles.border;
+                delete newStyles.borderTop;
+                delete newStyles.borderBottom;
+                delete newStyles.borderLeft;
+                delete newStyles.borderRight;
+                delete newStyles.borderRadius;
+                setState({ styles: newStyles });
+              }}
+            />
+          ),
+          style: { borderBottom: '1px solid #e6e6e6', borderRadius: 0 },
         },
       ]}
     />

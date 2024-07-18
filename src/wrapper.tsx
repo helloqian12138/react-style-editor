@@ -1,23 +1,16 @@
 import ConfigProvider from 'antd/es/config-provider';
 import zhCN from 'antd/es/locale/zh_CN';
 import React from 'react';
-import cloneDeep from 'lodash/cloneDeep';
 import { ReactStyleEditorHandler, ReactStyleEditorProps } from './typing';
-import {
-  EditorContext,
-  ReactStyleEditorContext,
-  ReactStyleEditorStates,
-} from './hook';
+import { EditorContext, ReactStyleEditorContext, ReactStyleEditorStates } from './hook';
 import EditorLayout from './layout';
+import { formatCSSProperties, parseStyles } from './utils/styles';
 
 const ReactStyleEditor = React.forwardRef(
-  (
-    props: ReactStyleEditorProps,
-    ref: React.ForwardedRef<ReactStyleEditorHandler>,
-  ) => {
-    const [editorStates, setEditorStates] = React.useState(
-      {} as ReactStyleEditorStates,
-    );
+  (props: ReactStyleEditorProps, ref: React.ForwardedRef<ReactStyleEditorHandler>) => {
+    const [editorStates, setEditorStates] = React.useState({
+      styles: parseStyles(props.value ?? {}),
+    } as ReactStyleEditorStates);
     const editorContext: ReactStyleEditorContext = {
       ...editorStates,
       setState: (states, callback) => {
@@ -37,8 +30,8 @@ const ReactStyleEditor = React.forwardRef(
     };
 
     React.useImperativeHandle(ref, () => ({
-      getStyle: () => '',
-      getCSSProperties: () => cloneDeep(editorStates.styles),
+      getCSSStyle: () => '',
+      getCSSProperties: () => formatCSSProperties(editorStates.styles),
     }));
 
     return (

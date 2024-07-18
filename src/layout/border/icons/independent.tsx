@@ -1,0 +1,24 @@
+import React from 'react';
+
+export interface IndependentRadiusProps {
+  width?: number;
+  height?: number;
+}
+
+const IndependentRadius = (props: IndependentRadiusProps) => (
+  <svg
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    width={props.width ?? 16}
+    height={props.height ?? 16}
+    fill="currentColor"
+  >
+    <path
+      // eslint-disable-next-line max-len
+      d="M384 85.333333v85.333334h-85.333333a128 128 0 0 0-128 128v85.333333H85.333333v-85.333333C85.333333 180.842667 180.842667 85.333333 298.666667 85.333333h85.333333zM170.666667 640v85.333333a128 128 0 0 0 128 128h85.333333v85.333334h-85.333333C180.842667 938.666667 85.333333 843.157333 85.333333 725.333333v-85.333333h85.333334z m768 0v85.333333c0 117.824-95.509333 213.333333-213.333334 213.333334h-85.333333v-85.333334h85.333333a128 128 0 0 0 128-128v-85.333333h85.333334zM725.333333 85.333333c117.824 0 213.333333 95.509333 213.333334 213.333334v85.333333h-85.333334v-85.333333a128 128 0 0 0-128-128h-85.333333V85.333333h85.333333z"
+    ></path>
+  </svg>
+);
+
+export default IndependentRadius;
