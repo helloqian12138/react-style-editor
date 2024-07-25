@@ -4,15 +4,16 @@ import { ReactStyleEditorProps } from '../typing';
 import BoxStylesEditor from './box';
 import { CaretRightOutlined, ClearOutlined } from '@ant-design/icons';
 
-import './index.less';
 import BorderStylesEditor, { BorderStylesEditorHandler } from './border';
-import { EditorContext } from '../hook';
+import TextStylesEditor, { TextStylesEditorHandler } from './text';
+
+import './index.less';
 
 const EditorLayout = (props: ReactStyleEditorProps) => {
   const container = React.useRef<HTMLDivElement>(null);
   const borderEditor = React.useRef<BorderStylesEditorHandler>(null);
+  const textEditor = React.useRef<TextStylesEditorHandler>(null);
   const [containerWidth, setContainerWidth] = React.useState(0);
-  const { styles, setState } = React.useContext(EditorContext);
 
   React.useEffect(() => {
     let ro: ResizeObserver | undefined;
@@ -39,7 +40,7 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
     <Collapse
       ref={container}
       bordered={false}
-      defaultActiveKey={['2']}
+      defaultActiveKey={['3']}
       expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       ghost
       size={props.size}
@@ -60,14 +61,20 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
               onClick={(e) => {
                 e.stopPropagation();
                 borderEditor.current?.clearState();
-                const newStyles = { ...styles };
-                delete newStyles.border;
-                delete newStyles.borderTop;
-                delete newStyles.borderBottom;
-                delete newStyles.borderLeft;
-                delete newStyles.borderRight;
-                delete newStyles.borderRadius;
-                setState({ styles: newStyles });
+              }}
+            />
+          ),
+          style: { borderBottom: '1px solid #e6e6e6', borderRadius: 0 },
+        },
+        {
+          key: '3',
+          label: '文字样式',
+          children: <TextStylesEditor ref={textEditor} />,
+          extra: (
+            <ClearOutlined
+              onClick={(e) => {
+                e.stopPropagation();
+                textEditor.current?.clearState();
               }}
             />
           ),

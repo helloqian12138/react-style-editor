@@ -1,0 +1,33 @@
+@prefixCls: rse-color-picker;
+
+.@{prefixCls}-editor {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .trigger {
+    padding: 3px;
+    border-radius: 2px;
+
+    .@{prefixCls}-block {
+      width: 16px;
+      height: 16px;
+    }
+
+    .@{prefixCls}-clear {
+      width: 16px;
+      height: 16px;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        display: block;
+        width: 24px;
+        height: 2px;
+        transform-origin: right;
+        transform: rotate(-45deg) translate(-6px, -4px);
+        background-color: #f5222d;
+      }
+    }
+  }
+}

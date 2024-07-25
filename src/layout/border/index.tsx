@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, ColorPicker, Form, Input, InputNumber, Radio, Row, Select, Slider, Tooltip } from 'antd';
+import { Col, Form, InputNumber, Radio, Row, Select, Slider } from 'antd';
 
 import './index.less';
 import {
@@ -10,7 +10,6 @@ import {
   BorderTopOutlined,
   DashOutlined,
   LineOutlined,
-  RedoOutlined,
   SmallDashOutlined,
 } from '@ant-design/icons';
 import classNames from 'classnames';
@@ -18,6 +17,7 @@ import { isEmptyObject } from '../../utils/number';
 import { EditorContext } from '../../hook';
 import UnionBorderRadius from './icons/unionborder';
 import IndependentRadius from './icons/independent';
+import RSEColorPicker from '../../components/color-picker';
 
 const prefixCls = 'rse-border';
 
@@ -211,6 +211,14 @@ const BorderStylesEditor = React.forwardRef((props, ref: React.ForwardedRef<Bord
       setBorderStyleByType('borderTop', {});
       setBorderRadiusType('united');
       setBorderRadius(null);
+      const newStyles = { ...styles };
+      delete newStyles.border;
+      delete newStyles.borderTop;
+      delete newStyles.borderBottom;
+      delete newStyles.borderLeft;
+      delete newStyles.borderRight;
+      delete newStyles.borderRadius;
+      setState({ styles: newStyles });
     },
   }));
 
@@ -304,56 +312,15 @@ const BorderStylesEditor = React.forwardRef((props, ref: React.ForwardedRef<Bord
               wrapperCol={{ span: 18 }}
               className="no-margin"
             >
-              <div className={`${prefixCls}-color-editor`}>
-                <ColorPicker
-                  size="small"
-                  value={getBorderStyleByType(borderKey)?.borderColor ?? ''}
-                  onChange={(color) => {
-                    setBorderStyleByType(borderKey, {
-                      ...getBorderStyleByType(borderKey),
-                      borderColor: color.toHexString(),
-                    });
-                  }}
-                >
-                  <Button className="trigger" size="small">
-                    {getBorderStyleByType(borderKey)?.borderColor ? (
-                      <div
-                        className="color-picker-block"
-                        style={{
-                          backgroundColor: getBorderStyleByType(borderKey)?.borderColor,
-                        }}
-                      />
-                    ) : (
-                      <div className="color-picker-clear" />
-                    )}
-                  </Button>
-                </ColorPicker>
-                <Input
-                  size="small"
-                  className="no-border"
-                  style={{ margin: '0 4px' }}
-                  value={getBorderStyleByType(borderKey)?.borderColor}
-                  onChange={(e) => {
-                    setBorderStyleByType(borderKey, {
-                      ...getBorderStyleByType(borderKey),
-                      borderColor: e.target.value,
-                    });
-                  }}
-                />
-                <Tooltip title="清空颜色">
-                  <Button
-                    size="small"
-                    shape="circle"
-                    icon={<RedoOutlined />}
-                    onClick={() => {
-                      setBorderStyleByType(borderKey, {
-                        ...getBorderStyleByType(borderKey),
-                        borderColor: '',
-                      });
-                    }}
-                  />
-                </Tooltip>
-              </div>
+              <RSEColorPicker
+                value={getBorderStyleByType(borderKey)?.borderColor ?? ''}
+                onChange={(value) => {
+                  setBorderStyleByType(borderKey, {
+                    ...getBorderStyleByType(borderKey),
+                    borderColor: value,
+                  });
+                }}
+              />
             </Form.Item>
             <Form.Item
               label={<span className={`${prefixCls}-style-editor-label`}>样式</span>}
@@ -382,7 +349,7 @@ const BorderStylesEditor = React.forwardRef((props, ref: React.ForwardedRef<Bord
           labelCol={{ span: 6 }}
           labelAlign="left"
           wrapperCol={{ span: 18 }}
-          className="no-margin"
+          style={{ marginBottom: '8px' }}
         >
           <Radio.Group
             size="small"

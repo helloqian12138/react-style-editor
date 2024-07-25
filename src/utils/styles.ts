@@ -76,13 +76,10 @@ export const parseStyles = (styles: string | React.CSSProperties): React.CSSProp
 
 export function formatCSSProperties(styles: React.CSSProperties): React.CSSProperties {
   const formattedStyles = cloneDeep(styles);
-  console.log('formattedStyles', formattedStyles);
 
   const { marginTop, marginBottom, marginLeft, marginRight } = styles;
   if (marginTop !== void 0 || marginBottom !== void 0 || marginLeft !== void 0 || marginRight !== void 0) {
-    console.log('has margin not undefined');
     formattedStyles.margin = `${marginTop ?? 0}px ${marginRight ?? 0}px ${marginBottom ?? 0}px ${marginLeft ?? 0}px`;
-    console.log('formattedStyles.margin', formattedStyles.margin);
   } else {
     delete formattedStyles.margin;
   }

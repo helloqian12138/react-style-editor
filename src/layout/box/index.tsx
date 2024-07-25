@@ -4,6 +4,7 @@ import { EditorContext } from '../../hook';
 import { ReactStyleEditorProps } from '../../typing';
 
 import './index.less';
+import { parseValueWithDm } from '../../utils/number';
 
 export interface BoxStylesEditorProps extends ReactStyleEditorProps {
   containerWidth: number;
@@ -23,17 +24,6 @@ const parseNumber = (str: string, max: number, min: number, handler: (val: numbe
     return;
   }
   return handler(value);
-};
-
-const parseValueWithDm = (str: string | number): (string | number | null | undefined)[] => {
-  if (typeof str === 'number') {
-    return [str, 'px'];
-  }
-  const matches = str.match(/(\d+)(\D+)/);
-  if (matches) {
-    return [parseInt(matches[1]), matches[2]];
-  }
-  return [null, void 0];
 };
 
 const selectAfter = (value: string | null | undefined, onChange: (value: string) => void) => (
@@ -56,6 +46,10 @@ const BoxStylesEditor = (props: BoxStylesEditorProps) => {
   const [containerSize, setContainerSize] = React.useState(props.containerWidth > 400 ? 'middle' : 'small');
   const [width, setWidth] = React.useState(parseValueWithDm(styles.width ?? ''));
   const [height, setHeight] = React.useState(parseValueWithDm(styles.height ?? ''));
+  const [minWidth, setMinWidth] = React.useState(parseValueWithDm(styles.minWidth ?? ''));
+  const [minHeight, setMinHeight] = React.useState(parseValueWithDm(styles.minHeight ?? ''));
+  const [maxWidth, setMaxWidth] = React.useState(parseValueWithDm(styles.maxWidth ?? ''));
+  const [maxHeight, setMaxHeight] = React.useState(parseValueWithDm(styles.maxHeight ?? ''));
 
   React.useEffect(() => {
     const newStyles = { ...styles };
@@ -210,6 +204,122 @@ const BoxStylesEditor = (props: BoxStylesEditorProps) => {
             const newStyles: React.CSSProperties = { ...styles, height: `${value}${height[1] ?? 'px'}` };
             if (value === null) {
               delete newStyles.height;
+            }
+            setState({
+              styles: newStyles,
+            });
+          }}
+        />
+      </Form.Item>
+      <Form.Item
+        label={<span className={`${prefixCls}-style-editor-label`}>最小宽度</span>}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
+        labelAlign="left"
+        className="no-margin"
+        style={{ marginTop: '12px' }}
+      >
+        <InputNumber
+          size="small"
+          addonAfter={selectAfter(minWidth[1] as string | undefined, (v) => {
+            setMinWidth([(minWidth[0] as number) ?? 0, v]);
+            setState({
+              styles: { ...styles, minWidth: `${minWidth[0] ?? 0}${v}` },
+            });
+          })}
+          value={minWidth ? (minWidth[0] as number) : 0}
+          onChange={(value) => {
+            setMinWidth([value as number, minWidth[1] ?? 'px']);
+            const newStyles: React.CSSProperties = { ...styles, minWidth: `${value}${minWidth[1] ?? 'px'}` };
+            if (value === null) {
+              delete newStyles.minWidth;
+            }
+            setState({
+              styles: newStyles,
+            });
+          }}
+        />
+      </Form.Item>
+      <Form.Item
+        label={<span className={`${prefixCls}-style-editor-label`}>最小高度</span>}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
+        labelAlign="left"
+        className="no-margin"
+        style={{ marginTop: '12px' }}
+      >
+        <InputNumber
+          size="small"
+          addonAfter={selectAfter(minHeight[1] as string | undefined, (v) => {
+            setMinHeight([(minHeight[0] as number) ?? 0, v]);
+            setState({
+              styles: { ...styles, minHeight: `${minHeight[0] ?? 0}${v}` },
+            });
+          })}
+          value={minHeight ? (minHeight[0] as number) : 0}
+          onChange={(value) => {
+            setMinHeight([value as number, minHeight[1] ?? 'px']);
+            const newStyles: React.CSSProperties = { ...styles, minHeight: `${value}${minHeight[1] ?? 'px'}` };
+            if (value === null) {
+              delete newStyles.minHeight;
+            }
+            setState({
+              styles: newStyles,
+            });
+          }}
+        />
+      </Form.Item>
+      <Form.Item
+        label={<span className={`${prefixCls}-style-editor-label`}>最大宽度</span>}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
+        labelAlign="left"
+        className="no-margin"
+        style={{ marginTop: '12px' }}
+      >
+        <InputNumber
+          size="small"
+          addonAfter={selectAfter(maxWidth[1] as string | undefined, (v) => {
+            setMaxWidth([(maxWidth[0] as number) ?? 0, v]);
+            setState({
+              styles: { ...styles, maxWidth: `${maxWidth[0] ?? 0}${v}` },
+            });
+          })}
+          value={maxWidth ? (maxWidth[0] as number) : 0}
+          onChange={(value) => {
+            setMaxWidth([value as number, maxWidth[1] ?? 'px']);
+            const newStyles: React.CSSProperties = { ...styles, maxWidth: `${value}${maxWidth[1] ?? 'px'}` };
+            if (value === null) {
+              delete newStyles.maxWidth;
+            }
+            setState({
+              styles: newStyles,
+            });
+          }}
+        />
+      </Form.Item>
+      <Form.Item
+        label={<span className={`${prefixCls}-style-editor-label`}>最大高度</span>}
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 18 }}
+        labelAlign="left"
+        className="no-margin"
+        style={{ marginTop: '12px' }}
+      >
+        <InputNumber
+          size="small"
+          addonAfter={selectAfter(maxHeight[1] as string | undefined, (v) => {
+            setMaxHeight([(maxHeight[0] as number) ?? 0, v]);
+            setState({
+              styles: { ...styles, maxHeight: `${maxHeight[0] ?? 0}${v}` },
+            });
+          })}
+          value={maxHeight ? (maxHeight[0] as number) : 0}
+          onChange={(value) => {
+            setMaxHeight([value as number, maxHeight[1] ?? 'px']);
+            const newStyles: React.CSSProperties = { ...styles, maxHeight: `${value}${maxHeight[1] ?? 'px'}` };
+            if (value === null) {
+              delete newStyles.maxHeight;
             }
             setState({
               styles: newStyles,

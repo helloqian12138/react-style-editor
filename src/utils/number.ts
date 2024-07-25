@@ -18,3 +18,14 @@ export const isEmptyObject = <T extends Record<string, unknown>>(obj: T) => {
   });
   return emptyLength === Object.keys(obj).length;
 };
+
+export const parseValueWithDm = (str: string | number): (string | number | null | undefined)[] => {
+  if (typeof str === 'number') {
+    return [str, 'px'];
+  }
+  const matches = str.match(/(\d+)(\D+)/);
+  if (matches) {
+    return [parseInt(matches[1]), matches[2]];
+  }
+  return [null, void 0];
+};
