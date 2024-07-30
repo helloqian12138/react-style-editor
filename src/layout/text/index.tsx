@@ -16,23 +16,13 @@ import Overline from './icons/overline';
 import './index.less';
 import NoWrapOutlined from './icons/nowrap';
 import WrapOutlined from './icons/wrap';
-import { parseValueWithDm } from '../../utils/number';
+import { parseValueWithDm, stringToNumber } from '../../utils/number';
 
 export interface TextStylesEditorHandler {
   clearState: () => void;
 }
 
 const prefixCls = 'rse-text';
-
-function stringToNumber(value: string | number, suffix?: string) {
-  if (typeof value === 'number' || value === void 0) {
-    return value;
-  }
-  if (suffix && value.endsWith(suffix)) {
-    return Number(value.replace(suffix, ''));
-  }
-  return Number(value);
-}
 
 function formatDecoration(value: string | undefined): (string | undefined)[] {
   if (typeof value === 'string') {

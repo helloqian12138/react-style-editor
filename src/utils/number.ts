@@ -29,3 +29,13 @@ export const parseValueWithDm = (str: string | number): (string | number | null 
   }
   return [null, void 0];
 };
+
+export function stringToNumber(value: string | number, suffix?: string) {
+  if (typeof value === 'number' || value === void 0) {
+    return value;
+  }
+  if (suffix && value.endsWith(suffix)) {
+    return Number(value.replace(suffix, ''));
+  }
+  return Number(value);
+}
