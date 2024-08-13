@@ -342,8 +342,7 @@ const TextStylesEditor = React.forwardRef((props, ref: React.ForwardedRef<TextSt
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         labelAlign="left"
-        className="no-margin"
-        style={{ marginTop: '12px' }}
+        style={{ marginBottom: '12px' }}
       >
         <InputNumber
           size="small"

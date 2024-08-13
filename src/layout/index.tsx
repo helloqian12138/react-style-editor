@@ -8,6 +8,8 @@ import BorderStylesEditor, { BorderStylesEditorHandler } from './border';
 import TextStylesEditor, { TextStylesEditorHandler } from './text';
 import BackgroundEditor from './background';
 import BoxShadowEditor, { BoxShadowEditorHandler } from './shadow';
+import PositionEditor, { PositionEditorHandler } from './position';
+import DisplayEditor, { DisplayEditorHandler } from './display';
 
 import './index.less';
 
@@ -16,6 +18,8 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
   const borderEditor = React.useRef<BorderStylesEditorHandler>(null);
   const textEditor = React.useRef<TextStylesEditorHandler>(null);
   const boxShadowEditor = React.useRef<BoxShadowEditorHandler>(null);
+  const positionEditor = React.useRef<PositionEditorHandler>(null);
+  const displayEditor = React.useRef<DisplayEditorHandler>(null);
   const [containerWidth, setContainerWidth] = React.useState(0);
 
   React.useEffect(() => {
@@ -43,7 +47,7 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
     <Collapse
       ref={container}
       bordered={false}
-      defaultActiveKey={['5']}
+      defaultActiveKey={['7']}
       expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       ghost
       size={props.size}
@@ -106,6 +110,34 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
               onClick={(e) => {
                 e.stopPropagation();
                 boxShadowEditor.current?.clearState();
+              }}
+            />
+          ),
+          style: { borderBottom: '1px solid #e6e6e6', borderRadius: 0 },
+        },
+        {
+          key: '6',
+          label: '定位设置',
+          children: <PositionEditor {...{ ...props, containerWidth }} ref={positionEditor} />,
+          extra: (
+            <ClearOutlined
+              onClick={(e) => {
+                e.stopPropagation();
+                positionEditor.current?.clearState();
+              }}
+            />
+          ),
+          style: { borderBottom: '1px solid #e6e6e6', borderRadius: 0 },
+        },
+        {
+          key: '7',
+          label: '布局设置',
+          children: <DisplayEditor {...{ ...props, containerWidth }} ref={displayEditor} />,
+          extra: (
+            <ClearOutlined
+              onClick={(e) => {
+                e.stopPropagation();
+                displayEditor.current?.clearState();
               }}
             />
           ),

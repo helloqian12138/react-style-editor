@@ -68,7 +68,7 @@ const parseBoxShadow = (boxShadow: string | undefined) => {
 const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShadowEditorHandler>) => {
   const { styles, setState } = React.useContext(EditorContext);
   const boxShadow = parseBoxShadow(styles.boxShadow);
-  const [type, setType] = React.useState(boxShadow.type);
+  const [shadowType, setShadowType] = React.useState(boxShadow.type);
   const [offsetX, setOffsetX] = React.useState(boxShadow.offsetX);
   const [offsetY, setOffsetY] = React.useState(boxShadow.offsetY);
   const [blurRadius, setBlurRadius] = React.useState(boxShadow.blurRadius);
@@ -81,13 +81,30 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
       setOffsetY(void 0);
       setBlurRadius(void 0);
       setSpreadRadius(void 0);
-      setType('outset');
+      setShadowType('outset');
       setBoxShadowColor('');
       const newStyles = { ...styles };
       delete newStyles.boxShadow;
       setState({ styles: newStyles });
     },
   }));
+
+  React.useEffect(() => {
+    if (offsetX === void 0 || offsetY === void 0 || blurRadius === void 0 || boxShadowColor === '') {
+      const newStyles = { ...styles };
+      delete newStyles.boxShadow;
+      setState({ styles: newStyles });
+      return;
+    }
+    const shadowValue = `${shadowType === 'inset' ? 'inset ' : ''}${offsetX ?? 0}${
+      offsetX ? 'px ' : ' '
+    }${offsetY ?? 0}${offsetY ? 'px ' : ' '}${blurRadius ?? 0}${
+      blurRadius ? 'px ' : ' '
+    }${spreadRadius ?? 0}${spreadRadius ? 'px ' : ' '}${boxShadowColor}`;
+    const newStyles = { ...styles, boxShadow: shadowValue };
+    setState({ styles: newStyles });
+  }, [shadowType, offsetX, offsetY, blurRadius, spreadRadius, boxShadowColor]);
+
   return (
     <div>
       <Form.Item
@@ -99,9 +116,10 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
       >
         <Radio.Group
           size="small"
-          value={type}
+          value={shadowType}
           onChange={(e) => {
-            setType(e.target.value);
+            setShadowType(e.target.value);
+            // handleSyncStyles();
           }}
         >
           <Radio.Button value="outset">
@@ -133,6 +151,7 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
               value={offsetX}
               onChange={(value) => {
                 setOffsetX(value as number);
+                // handleSyncStyles();
               }}
             />
           </Form.Item>
@@ -151,6 +170,7 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
               value={offsetY}
               onChange={(value) => {
                 setOffsetY(value as number);
+                // handleSyncStyles();
               }}
             />
           </Form.Item>
@@ -172,6 +192,7 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
               value={blurRadius}
               onChange={(value) => {
                 setBlurRadius(value as number);
+                // handleSyncStyles();
               }}
             />
           </Form.Item>
@@ -190,6 +211,7 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
               value={spreadRadius}
               onChange={(value) => {
                 setSpreadRadius(value as number);
+                // handleSyncStyles();
               }}
             />
           </Form.Item>
@@ -207,6 +229,7 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
           value={boxShadowColor as string}
           onChange={(value) => {
             setBoxShadowColor(value);
+            // handleSyncStyles();
           }}
         />
       </Form.Item>
@@ -214,5 +237,5 @@ const BoxShadowEditor = React.forwardRef((props, ref: React.ForwardedRef<BoxShad
   );
 });
 
-BoxShadowEditor.displayName = 'Editor';
+BoxShadowEditor.displayName = 'BoxShadowEditor';
 export default BoxShadowEditor;

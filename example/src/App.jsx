@@ -15,6 +15,8 @@ function App() {
     value: {
       margin: '8px 6px',
       border: '1px solid #1970FF',
+      position: 'absolute',
+      top: 2,
     },
   });
   return (

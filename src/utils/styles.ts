@@ -99,5 +99,8 @@ export function formatCSSProperties(styles: React.CSSProperties): React.CSSPrope
   delete formattedStyles.paddingBottom;
   delete formattedStyles.paddingLeft;
   delete formattedStyles.paddingRight;
+  if (formattedStyles.top === void 0) {
+    delete formattedStyles.top;
+  }
   return formattedStyles;
 }
