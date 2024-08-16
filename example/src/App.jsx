@@ -17,6 +17,7 @@ function App() {
       border: '1px solid #1970FF',
       position: 'absolute',
       top: 2,
+      cursor: 'pointer',
     },
   });
   return (

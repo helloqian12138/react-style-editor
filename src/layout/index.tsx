@@ -12,6 +12,7 @@ import PositionEditor, { PositionEditorHandler } from './position';
 import DisplayEditor, { DisplayEditorHandler } from './display';
 
 import './index.less';
+import OthersEditor, { OthersEditorHandler } from './others';
 
 const EditorLayout = (props: ReactStyleEditorProps) => {
   const container = React.useRef<HTMLDivElement>(null);
@@ -20,6 +21,7 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
   const boxShadowEditor = React.useRef<BoxShadowEditorHandler>(null);
   const positionEditor = React.useRef<PositionEditorHandler>(null);
   const displayEditor = React.useRef<DisplayEditorHandler>(null);
+  const othersEditor = React.useRef<OthersEditorHandler>(null);
   const [containerWidth, setContainerWidth] = React.useState(0);
 
   React.useEffect(() => {
@@ -47,7 +49,7 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
     <Collapse
       ref={container}
       bordered={false}
-      defaultActiveKey={['7']}
+      defaultActiveKey={['1']}
       expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
       ghost
       size={props.size}
@@ -138,6 +140,20 @@ const EditorLayout = (props: ReactStyleEditorProps) => {
               onClick={(e) => {
                 e.stopPropagation();
                 displayEditor.current?.clearState();
+              }}
+            />
+          ),
+          style: { borderBottom: '1px solid #e6e6e6', borderRadius: 0 },
+        },
+        {
+          key: '8',
+          label: '其他样式',
+          children: <OthersEditor {...{ ...props, containerWidth }} ref={othersEditor} />,
+          extra: (
+            <ClearOutlined
+              onClick={(e) => {
+                e.stopPropagation();
+                othersEditor.current?.clearState();
               }}
             />
           ),
